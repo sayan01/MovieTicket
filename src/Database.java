@@ -2,14 +2,22 @@ import java.io.*;
 
 public class Database{
 
-   private String[] movies, lang,time;
+   private String[] movies, lang;
 
     Database() throws IOException {
 
         //init movies database
+        loadMovies();
+
+        //init language database
+        lang = new String[]{"English","Hindi","Bengali","Tamil","Telegu"};
+
+    }
+
+    private void loadMovies() throws IOException{
         File f = new File("data\\movies.txt");
         if(!f.exists()){
-            System.out.println("Movie File Does Not Exist");
+            System.err.println("Movie File Does Not Exist");
             System.exit(1);
         }
         else{
@@ -22,14 +30,6 @@ public class Database{
         while(raf.getFilePointer()!= raf.length()){
             movies[k++] = raf.readLine();
         }
-
-        //init language database
-        lang = new String[]{"English","Hindi","Bengali","Tamil","Telegu"};
-
-        //init time database
-
-
-
     }
 
     private int count(String filename) throws IOException {
@@ -57,10 +57,6 @@ public class Database{
 
     String[] getLang() {
         return lang;
-    }
-
-    String[] getTime() {
-        return time;
     }
 
     String[] getMovies(){

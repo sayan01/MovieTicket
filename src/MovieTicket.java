@@ -2,12 +2,14 @@
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.*;
+import java.util.Objects;
 
 public class MovieTicket implements ActionListener {
     JFrame f;
     JButton b;
     JComboBox<String> movies;
     JComboBox<String> lang;
+    JComboBox<String> date;
     JComboBox<String> time;
     String name;
     Database db;
@@ -40,6 +42,11 @@ public class MovieTicket implements ActionListener {
                 "Username Input - MovieTicket",
                 JOptionPane.PLAIN_MESSAGE);
 
+        if(name == null){
+            System.err.println("No Name Entered");
+            System.exit(1);
+        }
+
         for(int i = 0;i<name.length();i++){
             if(!Character.isLetter(name.charAt(i))){
                 name = name.substring(0,i)+name.substring(i+1);
@@ -68,10 +75,12 @@ public class MovieTicket implements ActionListener {
         String[] mov = db.getMovies();
         movies = new JComboBox<String>(mov);
         movies.setBounds(150, 100, 250, 25);
+        movies.setSelectedIndex(-1);
         movies.addActionListener(this);
 
-        lang = new JComboBox<String>(new String[]{"English", "Hindi", "Bengali","Tamil","Telegu"});
+        lang = new JComboBox<String>(db.getLang());
         lang.setBounds(150, 150, 250, 25);
+        lang.setSelectedIndex(-1);
         lang.addActionListener(this);
 
         t1 = new JLabel("Choose Movie: ");
@@ -94,14 +103,21 @@ public class MovieTicket implements ActionListener {
     }
 
     void timing(){
-        String text = "Choose timing and date: ";
-        t1.setText(text);
+        t1.setText("Choose date and timing: ");
         t1.setHorizontalAlignment(SwingConstants.CENTER);
         t1.setBounds(0,10,width,20);
 
-        time = new JComboBox<>();
+        date = new JComboBox<>(DateTime.getDates(20));
+        date.setBounds(100,50,250,25);
+        date.setSelectedIndex(-1);
+        date.addActionListener(this);
 
-        f.add(t1);
+        time = new JComboBox<>(DateTime.getTimes((String)date.getSelectedItem()));
+        time.setBounds(100, 150, 250, 25);
+        time.setSelectedIndex(-1);
+        time.addActionListener(this);
+
+        f.add(t1); f.add(date); f.add(time); f.add(b);
 
     }
 
@@ -112,6 +128,20 @@ public class MovieTicket implements ActionListener {
         if (ae.getSource() == lang) // if language is changed
             System.out.println("Language Selected: " + lang.getSelectedItem());
 
+        if (ae.getSource() == time) // if language is changed
+            System.out.println("Time Selected: " + time.getSelectedItem());
+
+        if (ae.getSource() == date) /* if date is changed */ {
+            System.out.println("Date Selected: " + date.getSelectedItem());
+            f.remove(time);
+            time = new JComboBox<>(DateTime.getTimes((String) Objects.requireNonNull(date.getSelectedItem())));
+            time.setBounds(100, 150, 250, 25);
+            time.addActionListener(this);
+            f.add(time);
+            f.revalidate();
+            f.repaint();
+        }
+
 
         if (ae.getSource() == b) {  // if button is pressed
 
@@ -120,19 +150,27 @@ public class MovieTicket implements ActionListener {
                 movie_sel = movies.getSelectedIndex();
                 lang_sel = lang.getSelectedIndex();
 
+                if(movie_sel < 0 || lang_sel < 0){
+                    JOptionPane.showMessageDialog(f, "Please Choose Movie and Language",
+                            "Required Fields are empty", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
                 //Removing option to choose movies
                 f.getContentPane().removeAll();
+
+                //Moving to next scene
+                scene = 2;
+                timing();
 
                 //repainting frame
                 f.revalidate();
                 f.repaint();
 
-                //Moving to next scene
-                scene = 2;
-                timing();
             }
             else if (scene==2){
                 // implement moving to scene 3
+                System.out.println("Moving to scene 3");
             }
 
         }
