@@ -5,13 +5,10 @@ public class Database{
    private String[] movies, lang;
 
     Database() throws IOException {
-
         //init movies database
         loadMovies();
-
         //init language database
         lang = new String[]{"English","Hindi","Bengali","Tamil","Telegu"};
-
     }
 
     private void loadMovies() throws IOException{
@@ -23,18 +20,16 @@ public class Database{
         else{
             System.out.println("File Exist at : "+ f.getAbsolutePath());
         }
-
         int k=0;
-        movies = new String[count(f.getAbsolutePath())];
+        movies = new String[countLines(f.getAbsolutePath())];
         RandomAccessFile raf = new RandomAccessFile(f,"r");
         while(raf.getFilePointer()!= raf.length()){
             movies[k++] = raf.readLine();
         }
     }
 
-    private int count(String filename) throws IOException {
-        InputStream is = new BufferedInputStream(new FileInputStream(filename));
-        try {
+    private int countLines(String filename) throws IOException {
+        try (InputStream is = new BufferedInputStream(new FileInputStream(filename))) {
             byte[] c = new byte[1024];
             int count = 0;
             int readChars = 0;
@@ -46,12 +41,10 @@ public class Database{
                 }
                 endsWithoutNewLine = (c[readChars - 1] != '\n');
             }
-            if(endsWithoutNewLine) {
+            if (endsWithoutNewLine) {
                 ++count;
             }
             return count;
-        } finally {
-            is.close();
         }
     }
 
