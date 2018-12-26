@@ -21,6 +21,7 @@ public class MovieTicket implements ActionListener {
     int date_sel;
     int time_sel;
     int scene;
+    JButton[][] seats = new JButton[15][8];
 
     MovieTicket() throws IOException {
         scene=0;
@@ -144,7 +145,28 @@ public class MovieTicket implements ActionListener {
         f.add(t1); f.add(date); f.add(time); f.add(t2); f.add(t3); f.add(t4); f.add(next); f.add(back);
     }
 
-    private void seat() {
+    private void sc3() {
+
+        t1.setText("Choose Seats: ");
+        t1.setHorizontalAlignment(SwingConstants.CENTER);
+        t1.setBounds(width/2 - 50,10,100,25);
+
+//        String[] seats_oc = db.getSeats();
+
+        int xs = (width-30)/seats.length;
+        int ys = (height-80)/seats[0].length;
+        for(int i = 0; i < seats.length;i++){
+            for(int j = 0; j < seats[i].length;j++){
+                JButton seat;
+                seat = new JButton();
+                seat.setBounds(15 + (xs*i),40+(ys*j),xs-5,ys-5);
+                f.add(seat);
+                seats[i][j] = seat;
+            }
+        }
+
+        f.add(t1);
+
 
     }
 
@@ -162,7 +184,7 @@ public class MovieTicket implements ActionListener {
             System.out.println("Date Selected: " + date.getSelectedItem());
             f.remove(time);
             time = new JComboBox<>(DateTime.getTimes((String) Objects.requireNonNull(date.getSelectedItem())));
-            time.setBounds(100, 150, 250, 25);
+            time.setBounds(100, 125, 250, 25);
             time.setSelectedIndex(-1);
             time.addActionListener(this);
             f.add(time);
@@ -193,7 +215,7 @@ public class MovieTicket implements ActionListener {
                     return;
                 }
                 f.getContentPane().removeAll(); //Removing option to choose date and time
-                seat();     //moving to next scene
+                sc3();     //moving to next scene
                 f.revalidate(); //repainting frame
                 f.repaint();
             }
