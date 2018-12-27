@@ -2,11 +2,13 @@ import java.io.*;
 
 public class Database{
 
-   private String[] movies, lang;
+   private String[] movies, lang,seats;
 
     Database() throws IOException {
         //init movies database
         loadMovies();
+        //init seats database
+        loadSeats();
         //init language database
         lang = new String[]{"English","Hindi","Bengali","Tamil","Telegu"};
     }
@@ -25,6 +27,24 @@ public class Database{
         RandomAccessFile raf = new RandomAccessFile(f,"r");
         while(raf.getFilePointer()!= raf.length()){
             movies[k++] = raf.readLine();
+        }
+    }
+
+    private void loadSeats()  throws IOException {
+
+        File f = new File("data\\seats.txt");
+        if(!f.exists()){
+            System.err.println("Movie File Does Not Exist");
+            System.exit(1);
+        }
+        else{
+            System.out.println("File Exist at : "+ f.getAbsolutePath());
+        }
+        int k=0;
+        seats = new String[countLines(f.getAbsolutePath())];
+        RandomAccessFile raf = new RandomAccessFile(f,"r");
+        while(raf.getFilePointer()!= raf.length()){
+            seats[k++] = raf.readLine();
         }
     }
 
@@ -55,4 +75,9 @@ public class Database{
     String[] getMovies(){
         return movies;
     }
+
+    String[] getSeats() {
+        return seats;
+    }
+
 }

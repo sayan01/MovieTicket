@@ -7,7 +7,6 @@ public class PrintTicket
 
     public int print(Graphics g, PageFormat pf, int page)
             throws PrinterException {
-        System.out.println("I am called");
         if (page > 0) {
             return NO_SUCH_PAGE;
         }

@@ -1,5 +1,6 @@
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.util.Objects;
@@ -15,19 +16,26 @@ public class MovieTicket implements ActionListener {
     Database db;
     JLabel t1,t2,t3,t4,t5;
     ImageIcon icon;
+    ImageIcon[] seatIcons;
     int width,height;
     int movie_sel;
     int lang_sel;
     int date_sel;
     int time_sel;
     int scene;
-    JButton[][] seats = new JButton[15][8];
+    JButton[][] seats = new JButton[10][6];
 
     MovieTicket() throws IOException {
         scene=0;
         width = 450; height = 250;
         db = new Database();
         icon = new ImageIcon("assets\\icon.png");
+        seatIcons = new ImageIcon[2];
+//        seatIcons[0] = new ImageIcon("assets\\seat_n.png");
+//        seatIcons[1] = new ImageIcon("assets\\seat_s.png");
+        for(int i = 0;i < 2; i++){
+            seatIcons[i] = new ImageIcon("assets\\seat"+i+".png");
+        }
         input();
         f = new JFrame("MovieTicket");
         sc1();
@@ -151,19 +159,54 @@ public class MovieTicket implements ActionListener {
         t1.setHorizontalAlignment(SwingConstants.CENTER);
         t1.setBounds(width/2 - 50,10,100,25);
 
-//        String[] seats_oc = db.getSeats();
+        String[] seats_oc = db.getSeats();
 
-        int xs = (width-30)/seats.length;
-        int ys = (height-80)/seats[0].length;
+        int xs = (width-30)/seats.length;       //x-scale
+        int ys = (height-80)/seats[0].length;   //y-scale
         for(int i = 0; i < seats.length;i++){
             for(int j = 0; j < seats[i].length;j++){
+                char row = (char)(j+65);
                 JButton seat;
                 seat = new JButton();
-                seat.setBounds(15 + (xs*i),40+(ys*j),xs-5,ys-5);
+                seat.setBounds(10 + (xs*i),40+(ys*j),xs-5,ys-5);
+                seat.setIcon(seatIcons[0]);
+                seat.setText(""+row+(i+1));
+                seat.setMargin(new Insets(0,0,0,0));
+                seat.setFont(new Font("Consolas", Font.PLAIN, 10));
+                seat.setHorizontalTextPosition(JButton.CENTER);
+                seat.setVerticalTextPosition(JButton.CENTER);
+                seat.addActionListener(this);
                 f.add(seat);
                 seats[i][j] = seat;
             }
         }
+
+        for(int i = 0;i< seats_oc.length; i++){
+
+                    /* Checking if any seats of this show is booked,
+                     * If so, then marking them as booked and thus
+                     * Unavailable for booking by current user.
+                     */
+            String[] tokens = seats_oc[i].split("\t");
+            if (tokens.length<6)    continue;
+            if (tokens[0] .equals(movies.getItemAt(movie_sel)))
+                if(tokens[1].equals( lang.getItemAt(lang_sel)))
+                    if(tokens[2].equals(date.getItemAt(date_sel)))
+                        if(tokens[3].equals(time.getItemAt(time_sel)))
+                        {
+                            // token[4] is name of user who booked the tickets
+                            for(int j = 5;j<tokens.length;j++) {
+                                String seatID = tokens[j];
+                                int y = seatID.charAt(0) - 65;
+                                int x = new Integer(seatID.substring(1)) - 1;
+                                seats[x][y].setEnabled(false);
+                                seats[x][y].removeActionListener(this);
+                            }
+                        }
+
+        }
+
+
 
         f.add(t1);
 
@@ -230,5 +273,24 @@ public class MovieTicket implements ActionListener {
                 scene--;
             }
         }
+
+        //check all seats
+
+        if(seats[0][0]==null) return;
+        for(int i = 0 ; i < seats.length;i++){
+            for(int j = 0;j<seats[i].length;j++){
+                JButton seat = seats[i][j];
+                if(ae.getSource() == seat){
+                    if(seat.getIcon()==seatIcons[0]) {  // if seat was unselected
+                        seat.setIcon(seatIcons[1]);     // select seat
+                    }
+                    else if(seat.getIcon()==seatIcons[1]) { //if seat was selected
+                        seat.setIcon(seatIcons[0]);         //deselect seat
+                    }
+                }
+            }
+        }
+
+
     }
 }
