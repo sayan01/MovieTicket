@@ -26,3 +26,4 @@ Aquaman	English	Sat Dec 29 2018	07:00	Sayan	D7
 Aquaman	English	Sat Dec 29 2018	13:30	Sayan	C6
 Aquaman	English	Sat Dec 29 2018	13:30	Sayan	A6
 Spider-Man: Into the Spider-Verse	English	Sat Dec 29 2018	07:00	Sayan	B9
+Mary Poppins Returns	English	Sat Dec 29 2018	07:00	Sayan	C5
