@@ -3,11 +3,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class MovieTicket implements ActionListener {
     JFrame f;
-    JButton next,back;
+    JButton next,back,print;
     JComboBox<String> movies;
     JComboBox<String> lang;
     JComboBox<String> date;
@@ -24,6 +25,8 @@ public class MovieTicket implements ActionListener {
     int time_sel;
     int scene;
     JButton[][] seats = new JButton[10][6];
+    ArrayList<String> seats_booked;
+    static String[] receipt;
 
     MovieTicket() throws IOException {
         scene=0;
@@ -31,8 +34,8 @@ public class MovieTicket implements ActionListener {
         db = new Database();
         icon = new ImageIcon("assets\\icon.png");
         seatIcons = new ImageIcon[2];
-//        seatIcons[0] = new ImageIcon("assets\\seat_n.png");
-//        seatIcons[1] = new ImageIcon("assets\\seat_s.png");
+        seats_booked = new ArrayList<>();
+        receipt = new String[6];
         for(int i = 0;i < 2; i++){
             seatIcons[i] = new ImageIcon("assets\\seat"+i+".png");
         }
@@ -60,6 +63,7 @@ public class MovieTicket implements ActionListener {
                 i--;
             }
         }
+
         if(name.length()>20){               //If name is too long, truncate it
             name = name.substring(0,20)+"...";
         }
@@ -83,13 +87,11 @@ public class MovieTicket implements ActionListener {
         movies = new JComboBox<>(mov);
         movies.setBounds(100, 75, 250, 25);
         movies.setSelectedIndex(-1);
-        movies.addActionListener(this);
 
 
         lang = new JComboBox<>(db.getLang());
         lang.setBounds(100, 125, 250, 25);
         lang.setSelectedIndex(-1);
-        lang.addActionListener(this);
 
         t1 = new JLabel();
         t1.setText("Movie: ");
@@ -130,7 +132,9 @@ public class MovieTicket implements ActionListener {
         back.setBounds(10 , 180, 75, 25);
         back.addActionListener(this);
 
-        date = new JComboBox<>(DateTime.getDates(20));
+        next.setBounds(width - 95 , 180, 75, 25);
+
+        date = new JComboBox<>(DateTime.getDates(5));
         date.setBounds(100,75,250,25);
         date.setSelectedIndex(-1);
         date.addActionListener(this);
@@ -138,7 +142,6 @@ public class MovieTicket implements ActionListener {
         time = new JComboBox<>(DateTime.getTimes((String)date.getSelectedItem()));
         time.setBounds(100, 125, 250, 25);
         time.setSelectedIndex(-1);
-        time.addActionListener(this);
 
         t3 = new JLabel();
         t3.setText("Date: ");
@@ -155,9 +158,13 @@ public class MovieTicket implements ActionListener {
 
     private void sc3() {
 
+        seats_booked = new ArrayList<>();
         t1.setText("Choose Seats: ");
         t1.setHorizontalAlignment(SwingConstants.CENTER);
         t1.setBounds(width/2 - 50,10,100,25);
+
+        next.setBounds(width - 95,10,75,25);
+        back.setBounds(10,10,75,25);
 
         String[] seats_oc = db.getSeats();
 
@@ -208,23 +215,61 @@ public class MovieTicket implements ActionListener {
 
 
 
-        f.add(t1);
+        f.add(t1); f.add(next); f.add(back);
 
 
     }
 
+    private void sc4() throws IOException{
+
+        t1.setText("Tickets Booked Successfully!");
+        t1.setHorizontalAlignment(SwingConstants.CENTER);
+        t1.setBounds(width/2 - 125,10,250,20);
+
+        t2.setText("Your tickets have been booked successfully.");
+        t2.setHorizontalAlignment(SwingConstants.CENTER);
+        t2.setBounds(width/2 - 200,50,400,20);
+
+        t3.setText("You can now exit the window or print your tickets.");
+        t3.setHorizontalAlignment(SwingConstants.CENTER);
+        t3.setBounds(width/2 - 200,90,400,20);
+
+        next.setText("Close");
+        next.setBounds(width - 95 , 180, 75, 25);
+
+        print = new JButton("Print");
+        print.setBounds(10 , 180, 75, 25);
+        print.addActionListener(this);
+
+        f.add(t1);  f.add(t2);  f.add(t3);  f.add(next);    f.add(print);
+
+        String movie = movies.getItemAt(movie_sel);
+        String lan = lang.getItemAt(lang_sel);
+        String dat = date.getItemAt(date_sel);
+        String tim = time.getItemAt(time_sel);
+        db.setSeats(movie,
+                lan,
+                dat,
+                tim,
+                name,
+                seats_booked);
+
+        receipt[0] = "Name: "+name;
+        receipt[1] = "Movie: "+movie;
+        receipt[2] = "Language: "+lan;
+        receipt[3] = "Date: "+dat;
+        receipt[4] = "Time: "+tim;
+        receipt[5] = "Seats: ";
+
+        for(String seat:seats_booked){
+            receipt[5] += " "+seat;
+        }
+    }
+
     public void actionPerformed(ActionEvent ae) {
-        if (ae.getSource() == movies) // if movie is changed
-            System.out.println("Movie Selected: " + movies.getSelectedItem());
 
-        if (ae.getSource() == lang) // if language is changed
-            System.out.println("Language Selected: " + lang.getSelectedItem());
-
-        if (ae.getSource() == time) // if language is changed
-            System.out.println("Time Selected: " + time.getSelectedItem());
 
         if (ae.getSource() == date) /* if date is changed */ {
-            System.out.println("Date Selected: " + date.getSelectedItem());
             f.remove(time);
             time = new JComboBox<>(DateTime.getTimes((String) Objects.requireNonNull(date.getSelectedItem())));
             time.setBounds(100, 125, 250, 25);
@@ -233,6 +278,10 @@ public class MovieTicket implements ActionListener {
             f.add(time);
             f.revalidate();
             f.repaint();
+        }
+
+        if(ae.getSource() == print){
+            PrintTicket.print();
         }
 
         if (ae.getSource() == next) {  // if button is pressed
@@ -244,11 +293,13 @@ public class MovieTicket implements ActionListener {
                             "Required Fields are empty", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
+                System.out.println("Movie Selected: " + movies.getSelectedItem());
+                System.out.println("Language Selected: " + lang.getSelectedItem());
                 f.getContentPane().removeAll(); //Removing option to choose movies
                 sc2();   //Moving to next scene
-                f.revalidate(); //redoing frame
-                f.repaint();
             }
+
+
             else if (scene==2){ // If currently choosing date and time
                 date_sel = date.getSelectedIndex(); //Remembering choices
                 time_sel = time.getSelectedIndex();
@@ -257,21 +308,65 @@ public class MovieTicket implements ActionListener {
                             "Required Fields are empty", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
+                System.out.println("Date Selected: " + date.getSelectedItem());
+                System.out.println("Time Selected: " + time.getSelectedItem());
                 f.getContentPane().removeAll(); //Removing option to choose date and time
                 sc3();     //moving to next scene
-                f.revalidate(); //repainting frame
-                f.repaint();
             }
+
+
+            else if (scene==3){ // If currently choosing seats
+                if(seats_booked.isEmpty()){
+                    JOptionPane.showMessageDialog(f, "Please choose at least one seat.",
+                            "No Seats Chosen", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                else{
+                    String msg = "Are you sure you want to finalize the booking?" +
+                            "\nName: "+ name +
+                            "\nMovie: "+ movies.getItemAt(movie_sel)+
+                            "\nLanguage: " + lang.getItemAt(lang_sel)+
+                            "\nDate: "+date.getItemAt(date_sel)+
+                            "\nTime: "+time.getItemAt(time_sel)+
+                            "\nSeats: ";
+                    String seats = "";
+                    for(String seat : seats_booked) seats += seat + " ";
+                    msg += seats;
+                    int confirm = JOptionPane.showConfirmDialog(f,
+                            msg,
+                            "Confirm Booking?",
+                            JOptionPane.YES_NO_OPTION,
+                            JOptionPane.QUESTION_MESSAGE);
+                    if(confirm == 1) return;
+
+                    System.out.println("Seats Selected: " + seats);
+
+                }
+                f.getContentPane().removeAll(); //Removing option to choose date and time
+                try {
+                    sc4();     //moving to next scene
+                }catch (IOException e){}
+            }
+
+            if(scene == 4){
+                System.exit(0);
+            }
+
+            f.revalidate(); //redoing frame
+            f.repaint();
             scene++;
         }
         if(ae.getSource() == back){
+            f.getContentPane().removeAll(); //Removing other elements
             if(scene==2){
-                f.getContentPane().removeAll(); //Removing option to choose date and time
                 sc1();     //moving to previous scene
-                f.revalidate(); //repainting frame
-                f.repaint();
-                scene--;
             }
+            if(scene == 3){
+                sc2();     //moving to previous scene
+            }
+            f.revalidate(); //repainting frame
+            f.repaint();
+            scene--;
         }
 
         //check all seats
@@ -283,9 +378,11 @@ public class MovieTicket implements ActionListener {
                 if(ae.getSource() == seat){
                     if(seat.getIcon()==seatIcons[0]) {  // if seat was unselected
                         seat.setIcon(seatIcons[1]);     // select seat
+                        seats_booked.add(""+(char)(j+65)+(i+1));    // add the seat to the array of selected seats
                     }
                     else if(seat.getIcon()==seatIcons[1]) { //if seat was selected
                         seat.setIcon(seatIcons[0]);         //deselect seat
+                        seats_booked.remove(""+(char)(j+65)+(i+1));//remove the seat from the array of selected seats
                     }
                 }
             }

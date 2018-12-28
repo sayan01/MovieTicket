@@ -12,13 +12,16 @@ public class PrintTicket
         }
         Graphics2D g2d = (Graphics2D)g;
         g2d.translate(pf.getImageableX(), pf.getImageableY());
-
-            g.drawString("abc", 100, 100);
+        int i = 100;
+            for(String para:MovieTicket.receipt) {
+                g.drawString(para, 100, i);
+                i+=100;
+            }
 
         return PAGE_EXISTS;
     }
 
-    public static void main(String[] args){
+    public static void print(){
 
         PrinterJob job = PrinterJob.getPrinterJob();
         PrintTicket pt = new PrintTicket();
