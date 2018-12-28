@@ -7,6 +7,7 @@ public class Database{
 
    private String[] movies, lang,seats;
    private File movies_f, seats_f;
+   static String[] receipt;
 
     Database() throws IOException {
 
@@ -18,7 +19,7 @@ public class Database{
             // If no internet, then dont update
             System.out.println("No Internet Connection,\nCouldn't Update Database,\nUsing Local Database");
         }
-
+        receipt = new String[6];
         //init movies database
         loadMovies();
         //init seats database
@@ -113,20 +114,29 @@ public class Database{
     void setSeats(String movie, String lang, String date, String time, String name , ArrayList<String> seats)
                                                                     throws IOException  {
 
+        receipt[0] = movie;
+        receipt[1] = lang;
+        receipt[2] = date;
+        receipt[3] = time;
+        receipt[4] = name;
+        receipt[5] = "";
+
         if(name.equals("")){
             name = "<Anonymous>";
         }
 
         if(!seats_f.exists()){
-            System.err.println("Movie File Does Not Exist");
+            System.err.println("Seat File Does Not Exist");
             System.exit(1);
         }
         RandomAccessFile raf = new RandomAccessFile(seats_f,"rw");
         raf.seek(raf.length());
-        raf.writeBytes(movie+"\t"+lang+"\t"+date+"\t"+time+"\t"+name+"\t");
+        raf.writeBytes(movie+"\t"+lang+"\t"+date+"\t"+time+"\t"+name);
         for(String seat:seats){
-            raf.writeBytes(seat+"\t");
+            receipt[5] += seat+" ";
+            raf.writeBytes("\t"+seat);
         }
+        receipt[5] = receipt[5].trim();
         raf.writeBytes("\n");
         raf.close();
     }

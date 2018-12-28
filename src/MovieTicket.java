@@ -7,35 +7,27 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class MovieTicket implements ActionListener {
-    JFrame f;
-    JButton next,back,print;
-    JComboBox<String> movies;
-    JComboBox<String> lang;
-    JComboBox<String> date;
-    JComboBox<String> time;
-    String name;
-    Database db;
-    JLabel t1,t2,t3,t4,t5;
-    ImageIcon icon;
-    ImageIcon[] seatIcons;
-    int width,height;
-    int movie_sel;
-    int lang_sel;
-    int date_sel;
-    int time_sel;
-    int scene;
-    JButton[][] seats = new JButton[10][6];
-    ArrayList<String> seats_booked;
-    static String[] receipt;
+    private JFrame f;
+    private JButton next,back,print;
+    private JComboBox<String> movies,lang,date,time;
+    private String name;
+    private Database db;
+    private JLabel t1,t2,t3;
+    static ImageIcon icon;
+    private static ImageIcon icon_;
+    private static ImageIcon[] seatIcons;
+    private int width,height,movie_sel,lang_sel,date_sel,time_sel,scene;
+    private JButton[][] seats = new JButton[10][6];
+    private ArrayList<String> seats_booked;
 
-    MovieTicket() throws IOException {
+    private MovieTicket() throws IOException {
         scene=0;
         width = 450; height = 250;
         db = new Database();
         icon = new ImageIcon("assets\\icon.png");
+        icon_ = new ImageIcon("assets\\icon_small.png");
         seatIcons = new ImageIcon[2];
         seats_booked = new ArrayList<>();
-        receipt = new String[6];
         for(int i = 0;i < 2; i++){
             seatIcons[i] = new ImageIcon("assets\\seat"+i+".png");
         }
@@ -48,7 +40,7 @@ public class MovieTicket implements ActionListener {
         new MovieTicket();
     }
 
-    void input()   /* inputs username */   {
+    private void input()   /* inputs username */   {
         name = JOptionPane.showInputDialog(f,       //Input Prompt for inputting username
                 "Enter name: ",
                 "Username Input - MovieTicket",
@@ -72,10 +64,10 @@ public class MovieTicket implements ActionListener {
 
 
 
-    void sc1()  {
+    private void sc1()  {
 
         f.setSize(width, height);
-        f.setDefaultCloseOperation(3);
+        f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         f.setIconImage(icon.getImage());
 
         next = new JButton();
@@ -116,8 +108,8 @@ public class MovieTicket implements ActionListener {
         f.setVisible(true);
     }
 
-    void sc2(){
-        String movie = (String) movies.getSelectedItem();
+    private void sc2(){
+        String movie = movies.getItemAt(movie_sel);
         if(movie.length()>50)   movie = movie.substring(0,50)+"...";
         t1.setText("Movie:  "+movie);
         t1.setBounds(30,10,width,20);
@@ -148,7 +140,7 @@ public class MovieTicket implements ActionListener {
         t3.setHorizontalAlignment(SwingConstants.CENTER);
         t3.setBounds(0,75,100,25);
 
-        t4 = new JLabel();
+        JLabel t4 = new JLabel();
         t4.setText("Time: ");
         t4.setHorizontalAlignment(SwingConstants.CENTER);
         t4.setBounds(0,125,100,25);
@@ -188,21 +180,19 @@ public class MovieTicket implements ActionListener {
             }
         }
 
-        for(int i = 0;i< seats_oc.length; i++){
-
-                    /* Checking if any seats of this show is booked,
-                     * If so, then marking them as booked and thus
-                     * Unavailable for booking by current user.
-                     */
-            String[] tokens = seats_oc[i].split("\t");
-            if (tokens.length<6)    continue;
-            if (tokens[0] .equals(movies.getItemAt(movie_sel)))
-                if(tokens[1].equals( lang.getItemAt(lang_sel)))
-                    if(tokens[2].equals(date.getItemAt(date_sel)))
-                        if(tokens[3].equals(time.getItemAt(time_sel)))
-                        {
+        for (String st : seats_oc) {
+            /* Checking if any seats of this show is booked,
+             * If so, then marking them as booked and thus
+             * Unavailable for booking by current user.
+             */
+            String[] tokens = st.split("\t");
+            if (tokens.length < 6) continue;
+            if (tokens[0].equals(movies.getItemAt(movie_sel)))
+                if (tokens[1].equals(lang.getItemAt(lang_sel)))
+                    if (tokens[2].equals(date.getItemAt(date_sel)))
+                        if (tokens[3].equals(time.getItemAt(time_sel))) {
                             // token[4] is name of user who booked the tickets
-                            for(int j = 5;j<tokens.length;j++) {
+                            for (int j = 5; j < tokens.length; j++) {
                                 String seatID = tokens[j];
                                 int y = seatID.charAt(0) - 65;
                                 int x = new Integer(seatID.substring(1)) - 1;
@@ -253,17 +243,6 @@ public class MovieTicket implements ActionListener {
                 tim,
                 name,
                 seats_booked);
-
-        receipt[0] = "Name: "+name;
-        receipt[1] = "Movie: "+movie;
-        receipt[2] = "Language: "+lan;
-        receipt[3] = "Date: "+dat;
-        receipt[4] = "Time: "+tim;
-        receipt[5] = "Seats: ";
-
-        for(String seat:seats_booked){
-            receipt[5] += " "+seat;
-        }
     }
 
     public void actionPerformed(ActionEvent ae) {
@@ -329,8 +308,8 @@ public class MovieTicket implements ActionListener {
                             "\nDate: "+date.getItemAt(date_sel)+
                             "\nTime: "+time.getItemAt(time_sel)+
                             "\nSeats: ";
-                    String seats = "";
-                    for(String seat : seats_booked) seats += seat + " ";
+                    StringBuilder seats = new StringBuilder();
+                    for(String seat : seats_booked) seats.append(seat).append(" ");
                     msg += seats;
                     int confirm = JOptionPane.showConfirmDialog(f,
                             msg,
@@ -345,10 +324,14 @@ public class MovieTicket implements ActionListener {
                 f.getContentPane().removeAll(); //Removing option to choose date and time
                 try {
                     sc4();     //moving to next scene
-                }catch (IOException e){}
+                }catch (IOException ignored){ }
             }
 
             if(scene == 4){
+
+                JOptionPane.showMessageDialog(null,"MovieTicket ™  Project was made by: \n•Sayan Ghosh (18)" +
+                        "\n•Snehashis Ray (21)\n•Sroyon Bhattacharya (25)\n of XI-A – VMS","Credits",
+                        JOptionPane.INFORMATION_MESSAGE,icon_);
                 System.exit(0);
             }
 
