@@ -3,7 +3,7 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import java.io.*;
 import java.util.ArrayList;
 
-public class Database{
+class Database{
 
    private String[] movies, lang,seats;
    private File movies_f, seats_f;
@@ -88,7 +88,7 @@ public class Database{
         try (InputStream is = new BufferedInputStream(new FileInputStream(filename))) {
             byte[] c = new byte[1024];
             int count = 0;
-            int readChars = 0;
+            int readChars;
             boolean endsWithoutNewLine = false;
             while ((readChars = is.read(c)) != -1) {
                 for (int i = 0; i < readChars; ++i) {
