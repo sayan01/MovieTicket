@@ -67,7 +67,7 @@ public class MovieTicket implements ActionListener {
             name = name.substring(0,20)+"...";
         }
     }
-    
+
     private void sc1()  {
 
         f.setSize(width, height);
