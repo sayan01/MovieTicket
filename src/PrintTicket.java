@@ -1,19 +1,17 @@
-import java.awt.image.ImageObserver;
 import java.awt.print.*;
 import java.awt.*;
-import java.io.IOException;
 
 public class PrintTicket
         implements Printable {
 
-    public int print(Graphics g, PageFormat pf, int page)
-            throws PrinterException {
+    public int print(Graphics g, PageFormat pf, int page) {
         if (page > 0) {
             return NO_SUCH_PAGE;
         }
+        if(MovieTicket.f == null)   return NO_SUCH_PAGE;
         Graphics2D g2d = (Graphics2D)g;
         g2d.translate(pf.getImageableX(), pf.getImageableY());
-        String[] labels = {"Movie: ","Language: ","Date: ","Time: ","Name: ","Seats: "};
+        String[] labels = {"Movie: ","Language: ","Date: ","Time: ","Name: ","Seats: ","Price: "};
         int y = 300;
 
         g.setFont(new Font("Century Gothic",Font.PLAIN,55));
@@ -21,7 +19,7 @@ public class PrintTicket
 
         g.drawImage(MovieTicket.icon.getImage(), 400, 10, 150, 150,null);
 
-        for(int i = 0; i<6;i++) {
+        for(int i = 0; i<labels.length;i++) {
             String label = labels[i];
             String data = Database.receipt[i];
             g.setFont(new Font("Arial",Font.BOLD,20));
@@ -49,16 +47,16 @@ public class PrintTicket
 
     }
 
-    public static void print(){
-
+    static void print(){
         PrinterJob job = PrinterJob.getPrinterJob();
         PrintTicket pt = new PrintTicket();
         job.setPrintable(pt);
-        boolean doPrint = job.printDialog();
-        if (doPrint) {
+        if (job.printDialog()) {
             try {
                 job.print();
-            } catch (PrinterException e) {
+            }
+            catch (PrinterException pe) {
+                System.out.print("Could not Print");
             }
         }
     }

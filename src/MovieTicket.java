@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class MovieTicket implements ActionListener {
-    private JFrame f;
+    static JFrame f;
     private JButton next,back,print;
     private JComboBox<String> movies,lang,date,time;
     private String name;
@@ -21,7 +21,7 @@ public class MovieTicket implements ActionListener {
     private ArrayList<String> seats_booked;
 
     private MovieTicket() throws IOException {
-        scene=0;
+        scene=1;
         width = 450; height = 250;
         db = new Database();
         icon = new ImageIcon("assets\\icon.png");
@@ -37,6 +37,13 @@ public class MovieTicket implements ActionListener {
     }
 
     public static void main(String[] args) throws IOException {
+        if(args.length>0){
+            for (String arg : args) {
+                if (arg.equalsIgnoreCase("local")) {
+                    Database.update = false;
+                }
+            }
+        }
         new MovieTicket();
     }
 
@@ -59,7 +66,6 @@ public class MovieTicket implements ActionListener {
         if(name.length()>20){               //If name is too long, truncate it
             name = name.substring(0,20)+"...";
         }
-        scene = 1;
     }
 
 
@@ -151,9 +157,9 @@ public class MovieTicket implements ActionListener {
     private void sc3() {
 
         seats_booked = new ArrayList<>();
-        t1.setText("Choose Seats: ");
+        t1.setText("Choose Seats:  (AB = 120 CD = 240 EF = 360)");
         t1.setHorizontalAlignment(SwingConstants.CENTER);
-        t1.setBounds(width/2 - 50,10,100,25);
+        t1.setBounds(width/2 - 150,10,300,25);
 
         next.setBounds(width - 95,10,75,25);
         back.setBounds(10,10,75,25);
@@ -309,8 +315,12 @@ public class MovieTicket implements ActionListener {
                             "\nTime: "+time.getItemAt(time_sel)+
                             "\nSeats: ";
                     StringBuilder seats = new StringBuilder();
-                    for(String seat : seats_booked) seats.append(seat).append(" ");
-                    msg += seats;
+                    String price = "0";
+                    for(String seat : seats_booked) {
+                        seats.append(seat).append(" ");
+                        price = new Integer(price) + Database.price(seat)+"";
+                    }
+                    msg += seats+"\nPrice: "+price;
                     int confirm = JOptionPane.showConfirmDialog(f,
                             msg,
                             "Confirm Booking?",

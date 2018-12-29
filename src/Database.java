@@ -8,18 +8,23 @@ public class Database{
    private String[] movies, lang,seats;
    private File movies_f, seats_f;
    static String[] receipt;
+   static boolean update = true;
 
     Database() throws IOException {
 
         // if there is internet connection, then update the local movie database from the internet
         try {
+            assert(update);
             updateMovies();
         }
         catch (UnirestException ue){
-            // If no internet, then dont update
+            // If no internet, then don't update
             System.out.println("No Internet Connection,\nCouldn't Update Database,\nUsing Local Database");
         }
-        receipt = new String[6];
+        catch (AssertionError ae){
+            System.out.println("Executing locally");
+        }
+        receipt = new String[7];
         //init movies database
         loadMovies();
         //init seats database
@@ -29,13 +34,13 @@ public class Database{
     }
 
     private void updateMovies() throws UnirestException , IOException {
+        System.out.println("Updating Local Database");
         movies = GetMoviesOnline.getMovies();   // may throw Unirest exception
         movies_f = new File("data\\movies.txt");
         if(movies_f.exists()){
-            movies_f.delete();
+            if(!movies_f.delete()) throw new IOException("Local Database could not be deleted");
         }
-        movies_f.createNewFile();
-        System.out.println("Updating Local Database");
+        if(!movies_f.createNewFile()) throw new IOException("Local Database could not be created");
         RandomAccessFile raf = new RandomAccessFile(movies_f,"rw");
         for(String movie:movies){
             raf.writeBytes(movie+"\n");
@@ -79,7 +84,7 @@ public class Database{
         System.out.println("Seats Database Loaded!");
     }
 
-    private static int countLines(String filename) throws IOException {
+    static int countLines(String filename) throws IOException {
         try (InputStream is = new BufferedInputStream(new FileInputStream(filename))) {
             byte[] c = new byte[1024];
             int count = 0;
@@ -120,6 +125,7 @@ public class Database{
         receipt[3] = time;
         receipt[4] = name;
         receipt[5] = "";
+        receipt[6] = "0";
 
         if(name.equals("")){
             name = "<Anonymous>";
@@ -134,11 +140,20 @@ public class Database{
         raf.writeBytes(movie+"\t"+lang+"\t"+date+"\t"+time+"\t"+name);
         for(String seat:seats){
             receipt[5] += seat+" ";
+            receipt[6] = new Integer(receipt[6]) + price(seat) + "";
             raf.writeBytes("\t"+seat);
         }
         receipt[5] = receipt[5].trim();
         raf.writeBytes("\n");
         raf.close();
+    }
+
+    static int price(String seat){
+
+        int row = seat.charAt(0) - 65 ;
+        int d = row/2;
+        d+=1;
+        return d*120;
     }
 
 }

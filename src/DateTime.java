@@ -1,6 +1,6 @@
 import java.util.Calendar;
 
-public class DateTime {
+class DateTime {
     static String[] getDates(int noOfDays) {
         String[] dates = new String[noOfDays];
         Calendar c = Calendar.getInstance();
@@ -14,7 +14,7 @@ public class DateTime {
     }
 
     static String[] getTimes(String date) {
-        String[] times = new String[]{"07:00","13:30","16:45","23:00"};
+        String[] times = new String[]{"07:00","10:15","13:30","16:45","20:00","23:00"};
         if(date == null) return times;      // If no date is specified, return default timings
         Calendar c = Calendar.getInstance();// else check if specified date is current date
         String current = c.getTime().toString();
