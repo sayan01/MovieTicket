@@ -67,9 +67,7 @@ public class MovieTicket implements ActionListener {
             name = name.substring(0,20)+"...";
         }
     }
-
-
-
+    
     private void sc1()  {
 
         f.setSize(width, height);
@@ -208,12 +206,7 @@ public class MovieTicket implements ActionListener {
                         }
 
         }
-
-
-
         f.add(t1); f.add(next); f.add(back);
-
-
     }
 
     private void sc4() throws IOException{
@@ -252,7 +245,6 @@ public class MovieTicket implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent ae) {
-
 
         if (ae.getSource() == date) /* if date is changed */ {
             f.remove(time);
