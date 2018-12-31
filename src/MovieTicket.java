@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class MovieTicket implements ActionListener {
     static JFrame f;
@@ -248,7 +247,7 @@ public class MovieTicket implements ActionListener {
 
         if (ae.getSource() == date) /* if date is changed */ {
             f.remove(time);
-            time = new JComboBox<>(DateTime.getTimes((String) Objects.requireNonNull(date.getSelectedItem())));
+            time = new JComboBox<>(DateTime.getTimes((String) date.getSelectedItem()));
             time.setBounds(100, 125, 250, 25);
             time.setSelectedIndex(-1);
             time.addActionListener(this);

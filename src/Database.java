@@ -1,37 +1,58 @@
-import com.mashape.unirest.http.exceptions.UnirestException;
+import com.mashape.unirest.http.exceptions.UnirestException; // UnirestException may be thrown while trying to update
+                                                                    // Movie Database
 
 import java.io.*;
 import java.util.ArrayList;
 
+/*
+*   This class stores all of the data needed for the application to run, namely:
+ *          * the movies now showing (present in the local movie database)
+ *          * the languages available (English and Hindi only)
+ *          * the seats which are already booked ( present in the local seats database)
+ *          * the receipt for the tickets booked by the current user (initialized after booking is finalized)
+ *  It has methods for loading the data from the local database into memory
+ *  and method for updating the local database from online database
+*/
+
 class Database{
 
-   private String[] movies, lang,seats;
-   private File movies_f, seats_f;
-   static String[] receipt;
-   static boolean update = true;
+   private String[] movies, lang,seats;     // The data from the database
+   private File movies_f, seats_f;          // The local files of the database
+   static String[] receipt;                 // Receipt data
+   static boolean update = true;            // Whether to update the local database or not
+
+    /*
+    *   Constructor :
+    *       Parameters: none
+    *       Description: It runs when a Database object is initialized, it performs initial loading tasks.
+    */
 
     Database() throws IOException {
-
-        // if there is internet connection, then update the local movie database from the internet
+                                                                // if there is internet connection,
+                                                               // then update the local movie database from the internet
         try {
-            assert(update);
-            updateMovies();
+            if(!update) throw new AssertionError();     // If it is mentioned to run locally, then don't update database
+            updateMovies();                             // May throw Unirest Exception if unable to connect to internet
         }
-        catch (UnirestException ue){
-            // If no internet, then don't update
+        catch (UnirestException ue){                    // If no internet, then don't update
             System.out.println("No Internet Connection,\nCouldn't Update Database,\nUsing Local Database");
         }
         catch (AssertionError ae){
             System.out.println("Executing locally");
         }
-        receipt = new String[7];
-        //init movies database
-        loadMovies();
-        //init seats database
-        loadSeats();
-        //init language database
-        lang = new String[]{"English","Hindi"};
+        receipt = new String[7];    // initializing the receipt array
+        loadMovies();               // loading the movies local database into memory
+        loadSeats();                // loading the seats local database into memory
+        lang = new String[]{"English","Hindi"}; // initializing language database
     }
+
+    /*
+    *   Method: updateMovies()
+    *   Parameters: none
+    *   Returns: void
+    *   Description: This method tries to update the local movies database by calling the getMovies() method from
+    *               class GetMoviesOnline
+    */
 
     private void updateMovies() throws UnirestException , IOException {
         System.out.println("Updating Local Database");
