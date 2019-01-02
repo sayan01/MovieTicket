@@ -7,24 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="faf08d2a-e713-4984-b0f5-a515ac3f6310" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Sayan.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Sayan.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MovieTicket.jar" beforeDir="false" afterPath="$PROJECT_DIR$/MovieTicket.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/movies.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/movies.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MovieTicket/AutoFillSeats.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MovieTicket/AutoFillSeats.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MovieTicket/Database.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MovieTicket/Database.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MovieTicket/DateTime.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MovieTicket/DateTime.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MovieTicket/GetMoviesOnline.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MovieTicket/GetMoviesOnline.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MovieTicket/MovieTicket.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MovieTicket/MovieTicket.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MovieTicket/PrintTicket.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MovieTicket/PrintTicket.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MovieTicket/movies.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MovieTicket/movies.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AutoFillSeats.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AutoFillSeats.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DateTime.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DateTime.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GetMoviesOnline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GetMoviesOnline.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MovieTicket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MovieTicket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PrintTicket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PrintTicket.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -37,7 +20,7 @@
     <session id="-437434397">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="7" />
+          <entry key="project.closed" value="8" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.22" value="1" />
           <entry key="project.open.time.23" value="1" />
@@ -50,11 +33,13 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
+          <entry key="html" value="1" />
           <entry key="java" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
+          <entry key="HTML" value="1" />
           <entry key="JAVA" value="11" />
         </counts>
       </usages-collector>
@@ -114,10 +99,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Database.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="-436">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#Database#0;class#Database#0" />
@@ -136,7 +121,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/MovieTicket.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="100">
@@ -246,7 +231,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546275390897" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546362010912" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -314,9 +299,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26865673" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26865673" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -326,7 +310,7 @@
       <window_info id="Favorites" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.329718" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.22776572" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.22776572" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -376,26 +360,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Database.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#Database#0;class#Database#0" />
-            <element signature="method#loadMovies#0;class#Database#0" />
-            <element signature="method#loadSeats#0;class#Database#0" />
-            <element signature="method#countLines#0;class#Database#0" />
-            <element signature="e#5167#5168#0" expanded="true" />
-            <element signature="e#5194#5195#0" expanded="true" />
-            <element signature="e#5221#5222#0" expanded="true" />
-            <element signature="e#5250#5251#0" expanded="true" />
-            <element signature="e#5277#5278#0" expanded="true" />
-            <element signature="e#5305#5306#0" expanded="true" />
-            <element signature="method#setSeats#0;class#Database#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/GetMoviesOnline.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="680">
@@ -412,6 +376,33 @@
           <caret line="5" column="27" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Readme.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Database.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-436">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#Database#0;class#Database#0" />
+            <element signature="method#loadMovies#0;class#Database#0" />
+            <element signature="method#loadSeats#0;class#Database#0" />
+            <element signature="method#countLines#0;class#Database#0" />
+            <element signature="e#5167#5168#0" expanded="true" />
+            <element signature="e#5194#5195#0" expanded="true" />
+            <element signature="e#5221#5222#0" expanded="true" />
+            <element signature="e#5250#5251#0" expanded="true" />
+            <element signature="e#5277#5278#0" expanded="true" />
+            <element signature="e#5305#5306#0" expanded="true" />
+            <element signature="method#setSeats#0;class#Database#0" />
           </folding>
         </state>
       </provider>

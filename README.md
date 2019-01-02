@@ -10,11 +10,12 @@ of XI-A (2018-19) – VMS, for Computer Project.
 ### Project Description :
 ##### Language : Java SE 8
 ##### Dependencies and Libraries used :
-* `Swing` and `AWT` - for GUI [internal]
-* [`Unirest`](http://unirest.io/java.html "Unirest Website") - for Sending and Recieving Network Requests [external]
-* [`org.json`](https://mvnrepository.com/artifact/org.json/json "org.json repository") - for Parsing JSON data [external]
-* `PrinterJob` (`java.awt`) - for Printing [internal]
-* `Calender` (`java.util`) - for Date and Time management [internal]
+* [`Swing`][Swing] and [`AWT`][AWT] - for GUI [internal]
+* [`TMDb API`][tmdb] - for getting name of recent movies [online]
+* [`Unirest`][unirest] - for Sending and Recieving Network Requests [external]
+* [`org.json`][org.json] - for Parsing JSON data [external]
+* [`PrinterJob`][PrinterJob] (`java.awt`) - for Printing [internal]
+* [`Calendar`][Calendar] (`java.util`) - for Date and Time management [internal]
 * Other `util` and `io` classes [internal]
 
 ##### Description :
@@ -44,3 +45,21 @@ After program is launched, User is expected to :
 Seats already booked are grayed out, user can select as many seats he wants (minimum 1)
 * Confirm the booking
 * User can also **print** the ticket (optional)
+## Source :
+The code is available in [this github repo][Repo].
+It contains the following :
+* ##### `src/`  - source code for the program (`.java` files)
+* ##### `assets/`  - assets needed for the program (`.png` files)
+* ##### `data/`  - database needed for the program (`.txt` files)
+* ##### `out/`  - executable classes (`.class` files)
+* ##### `lib/`  - external libraries (`.class` files)
+* ##### `MovieTicket.jar`  - main executable jar file
+
+[tmdb]: https://www.themoviedb.org/documentation/api "TMDb API Documentation"
+[unirest]: http://unirest.io/java.html "Unirest Website"
+[org.json]: https://mvnrepository.com/artifact/org.json/json "org.json repository"
+[PrinterJob]: https://docs.oracle.com/javase/7/docs/api/java/awt/print/PrinterJob.html "PrinterJob Documentation"
+[Calendar]: https://docs.oracle.com/javase/7/docs/api/java/util/Calendar.html "Calender Documentation"
+[Swing]: https://docs.oracle.com/javase/7/docs/api/javax/swing/package-summary.html "Swing Documentation"
+[AWT]: https://docs.oracle.com/javase/7/docs/api/java/awt/package-summary.html "AWT Documentation"
+[Repo]: https://github.com/sayan01/MovieTicket "Movie Ticket Github Repository"
