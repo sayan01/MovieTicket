@@ -37,9 +37,10 @@ public class PrintTicket
                                                                                                         // logo at top
                                                                                             // (MovieTicket class needs
         																	// to be instantiated to access icon field)
+        String[] receipt = Database.getReceipt();
         for(int i = 0; i<labels.length;i++) {
             String label = labels[i];				// for each field label
-            String data = Database.receipt[i];		// for each field data
+            String data = receipt[i];		// for each field data
             g.setFont(new Font("Arial",Font.BOLD,20));
             g.drawString(label, 20, y);				// draw field label
             g.setFont(new Font("Consolas",Font.PLAIN,16));

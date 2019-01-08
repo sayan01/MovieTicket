@@ -1230,3 +1230,5 @@ Hunter Killer	Hindi	Wed Jan 02 2019	13:30	<AutoFillBot>	D8	F6	C6	F1	F10
 Hunter Killer	Hindi	Wed Jan 02 2019	16:45	<AutoFillBot>	F7	D5	A1	E6	D7
 Hunter Killer	Hindi	Wed Jan 02 2019	20:00	<AutoFillBot>	D5	B5	F7	D9	D5
 Hunter Killer	Hindi	Wed Jan 02 2019	23:00	<AutoFillBot>	C6	C8	B8	B4	E10
+Replicas	English	Sat Jan 05 2019	13:30	Sayn	A4	B5	C6	D7	E8	F9
+Bumblebee	Hindi	Wed Jan 09 2019	07:00	Sayan	A6	B7	C8	C7	D7	D8	D9	C9
