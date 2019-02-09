@@ -1,4 +1,5 @@
 # MovieTicket
+Download application : https://github.com/sayan01/MovieTicket/archive/master.zip
  **MovieTicket** Project was made by : 
  
 * ***Sayan Ghosh*** (18)
