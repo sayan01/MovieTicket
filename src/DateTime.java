@@ -7,7 +7,7 @@ class DateTime {
 	*	Method: getDates
 	*	Parameters: int noOfDays - the length of array to be returned (no of future dates needed)
 	*	Return type: String[]
-	*	Description: This method returns an string array of future dates (including the current date) using the Calender
+	*	Description: This method returns an string array of future dates (including the current date) using the Calendar
 	*          	     class
 	*/
     static String[] getDates(int noOfDays) {
