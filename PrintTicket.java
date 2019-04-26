@@ -48,10 +48,6 @@ public class PrintTicket
                                                         // next lines (wordWrap)
             y+=30;									// after all of data is drawn, increase y for drawing next field
         }
-
-        g.setFont(new Font("Malgun Gothic Semilight",Font.PLAIN,10));
-        g.drawString("© VMS Computer Project – XI-A – 18 • 21 • 25",400,775);	// draw footer
-
         return PAGE_EXISTS;
     }
 	/*
