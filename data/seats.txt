@@ -1235,3 +1235,6 @@ Bumblebee	Hindi	Wed Jan 09 2019	07:00	Sayan	A6	B7	C8	C7	D7	D8	D9	C9
 Glass	English	Sat Feb 02 2019	20:00	Sayan	B4	B5	B6	B7	C7	C6	C5	C4
 Glass	English	Sun Feb 03 2019	07:00	Sayan	B5	C5	E5
 Hellboy	English	Sun Apr 28 2019	10:15	Sayan	D5
+Captain Marvel	English	Sun Apr 28 2019	10:15	Sayan	C5
+How to Train Your Dragon: The Hidden World	English	Sat Apr 27 2019	10:15	Sayan	B5	B6
+How to Train Your Dragon: The Hidden World	English	Sat Apr 27 2019	10:15	Sayan	C5	C6

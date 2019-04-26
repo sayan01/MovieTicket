@@ -503,17 +503,7 @@ public class MovieTicket implements ActionListener {
 
             // If currently in scene 4 [user pressed close button]
             if(scene == 4){
-
-                //Show credits and then exit program
-                JOptionPane.showMessageDialog(null,         // parent frame
-                        "MovieTicket Project was made by: " +     // message to be shown
-                                "\n•Sayan Ghosh (18)" +
-                                "\n•Snehashis Ray (21)" +
-                                "\n•Sroyon Bhattacharya (25)" +
-                                "\n of XI-A – VMS",
-                        "Credits",                                  // title
-                        JOptionPane.INFORMATION_MESSAGE,                // type of message
-                        icon_);                                         // icon
+                    // Exit
                 System.exit(0);
             }
 
