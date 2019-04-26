@@ -1,40 +1,25 @@
 # MovieTicket
 
- **MovieTicket** Project was made by :
-
-* ***Sayan Ghosh*** (18)
-* ***Snehashis Ray*** (21)
-* ***Sroyon Bhattacharya*** (25)
-
-of XI-A (2018-19) – VMS, for Computer Project.
-
 ### Project Description :
 ##### Language : Java SE 8
 ##### Dependencies and Libraries used :
-* [`Swing`][Swing] and [`AWT`][AWT] - for GUI [internal]
 * [`TMDb API`][tmdb] - for getting name of recent movies [online]
 * [`Unirest`][unirest] - for Sending and Recieving Network Requests [external]
 * [`org.json`][org.json] - for Parsing JSON data [external]
-* [`PrinterJob`][PrinterJob] (`java.awt`) - for Printing [internal]
-* [`Calendar`][Calendar] (`java.util`) - for Date and Time management [internal]
-* Other `util` and `io` classes [internal]
 
 ##### Description :
-The application lets the user **book** *seats* for *movie shows* for a *single hall*. [not real tickets]
+The application simulates a movie booking application. This does not actually book any tickets.
 It stores the seats already booked by previous users in a **local database** and thus marks them *unavailable* for the next users. It also stores the name of the users.
 It lets the user **print** the *tickets* (on paper) after booking.
 It **updates** the *local movie database* from the *internet*
 ### System Requirements :
-##### OS : Windows
-##### Java : 8 [ jdk 1.8.* ]
+##### OS : Windows / Linux
+##### Java : 8 [ jdk 1.8.* ] or above
 ### Usage Instruction :
 ##### How to run :
-User must have Java installed on their Windows Computer and have the `\bin` directory of jdk installation set in "path" environmental variable.
-* Simply run the `MovieTicket.jar` file to run the program.
-In case it isn't automatically associated to be opened with the `Java(TM) Platform SE binary`, open its properties and change its default 'open with' to the `javaw.exe` present in the `/bin` directory where jdk is installed.
-OR
-* Open the command prompt to the project folder's root and type `java -jar MovieTicket.jar`
-optionally, you can add another parameter 'local' at the end to make the program run locally. This prevents it from updating the local database from internet. eg. `java -jar MovieTicket.jar local`
+User must have jdk/jre installed on their Computer and have the `/bin` directory of jdk installation set in "path" environmental variable.
+* Open terminal to the project folder's root and type `java  MovieTicket`
+optionally, you can add another parameter 'local' at the end to make the program run locally. This prevents it from updating the local database from internet. eg. `java MovieTicket local`
 ##### After launching :
 After program is launched, User is expected to :
 * Enter their **name** (optional)
@@ -51,13 +36,6 @@ The application is available here : https://github.com/sayan01/MovieTicket/archi
 
 The code is available in this github repo: https://github.com/sayan01/MovieTicket
 
-It contains the following :
-* ##### `src/`  - source code for the program (`.java` files)
-* ##### `assets/`  - assets needed for the program (`.png` files)
-* ##### `data/`  - database needed for the program (`.txt` files)
-* ##### `out/`  - executable classes (`.class` files)
-* ##### `lib/`  - external libraries (`.class` files)
-* ##### `MovieTicket.jar`  - main executable jar file
 
 [tmdb]: https://www.themoviedb.org/documentation/api "TMDb API Documentation"
 [unirest]: http://unirest.io/java.html "Unirest Website"
