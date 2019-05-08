@@ -1240,3 +1240,13 @@ How to Train Your Dragon: The Hidden World	English	Sat Apr 27 2019	10:15	Sayan	B
 How to Train Your Dragon: The Hidden World	English	Sat Apr 27 2019	10:15	Sayan	C5	C6
 Avengers: Endgame	English	Sat May 04 2019	20:00	Moja	F1	F2	F3	F4	F5	F6	F7	F8	F9	F10	A5
 Avengers: Endgame	English	Sat May 04 2019	20:00	Sayan	E10	E9	E8	E7
+Cold Pursuit	English	Thu May 09 2019	07:00	Sayan	B4	B5	B6	B7
+Us	English	Fri May 10 2019	07:00	Sayan	B5	C5	D5	D6	D7	C7	B7
+Hellboy	English	Fri May 10 2019	07:00	<Anonymous>	B5	B6	B7
+After	Hindi	Sat May 11 2019	10:15	Say	C6
+After	English	Thu May 09 2019	10:15	Sayan	C5
+Avengers: Endgame	Hindi	Thu May 09 2019	07:00	hh	B6
+Hellboy	English	Wed May 08 2019	23:00	Sayan	B5	B7	B6
+Avengers: Endgame	English	Thu May 09 2019	07:00	Satan	A6	A7	A8
+Avengers: Endgame	Hindi	Thu May 09 2019	10:15	Sayan	A5
+Avengers: Endgame	English	Wed May 08 2019	23:00	Sayan	A5	A6	A8
