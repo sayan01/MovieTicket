@@ -107,9 +107,12 @@ class Database{
     private void loadSeats()  throws IOException {
 
         seats_f = new File("data/seats.txt");
-        if(!seats_f.exists()){                  // If database file doesn't exist, terminate.
-            System.err.println("Movie File Does Not Exist");
-            System.exit(1);
+        if(!seats_f.exists()){                  // If database file doesn't exist, create it.
+            System.err.println("Seats File Does Not Exist, Creating.");
+            if(seats_f.createNewFile()) System.out.println("Seats File Created at : "+ seats_f.getAbsolutePath());
+            else{
+                System.err.print("Could not create seats file.");   // If cannot make file, exit.
+            }
         }
         else{
             System.out.println("Seats File Exist at : "+ seats_f.getAbsolutePath());
