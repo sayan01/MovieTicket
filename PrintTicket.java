@@ -30,10 +30,10 @@ public class PrintTicket
         int y = 300;				// The y-axis coordinate to start printing the receipt from
                                     // (0px - 300px is used for Heading and logo)
 
-        g.setFont(new Font("Century Gothic",Font.PLAIN,55));
-        g.drawString("MovieTicket",50,100);					// Draw big heading at the top of page
+        g.setFont(new Font("Century Gothic",Font.PLAIN,35));
+        g.drawString("MovieTicket",55,100);					// Draw big heading at the top of page
 
-        g.drawImage(MovieTicket.icon.getImage(), 400, 10, 150, 150,null);   // Draw the program
+        g.drawImage(MovieTicket.icon.getImage(), 350, 20, 100, 100,null);   // Draw the program
                                                                                                         // logo at top
                                                                                             // (MovieTicket class needs
         																	// to be instantiated to access icon field)
