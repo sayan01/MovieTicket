@@ -32,9 +32,8 @@ Seats already booked are grayed out, user can select as many seats he wants (min
 * Confirm the booking
 * User can also **print** the ticket (optional)
 ## Source :
-The application is available here : [https://github.com/sayan01/MovieTicket/archive/master.zip](https://github.com/sayan01/MovieTicket/archive/master.zip)
-
-The code is available in this github repo: [https://github.com/sayan01/MovieTicket](https://github.com/sayan01/MovieTicket)
+* The application is available here : [https://github.com/sayan01/MovieTicket/archive/master.zip](https://github.com/sayan01/MovieTicket/archive/master.zip)
+* The code is available in this github repo: [https://github.com/sayan01/MovieTicket](https://github.com/sayan01/MovieTicket)
 
 
 [tmdb]: https://www.themoviedb.org/documentation/api "TMDb API Documentation"
