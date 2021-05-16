@@ -185,6 +185,7 @@ class Database{
 				raf.writeBytes("\t"+seat);  // Store seats in database
 			}
 			receipt[5] = receipt[5].trim();
+			receipt[6] = "Rs. " + receipt[6];
 			raf.writeBytes("\n");
 			raf.close();
 	}

@@ -221,18 +221,19 @@ public class MovieTicket implements ActionListener {
 		back.setBounds(10,10,75,25);         // of text field
 		String[] seats_oc = db.getSeats(); // Array of all the seats which are already booked
 		// Make seats and add them to frame
-		int xs = (width-30)/seats.length;  //x-scale for drawing seats
-		int ys = (height-80)/seats[0].length;//y-scale for drawing seats
+		int xs = (width-20)/seats.length;  //x-scale for drawing seats
+		int ys = (height-50)/seats[0].length;//y-scale for drawing seats
 		for(int i = 0; i < seats.length;i++){
 			for(int j = 0; j < seats[i].length;j++){
 				String seatCode = ""+(char)(j+65)+(i+1); // get seat row
 				JButton seat;   // make seat button
 				seat = new JButton();
-				seat.setBounds(10 + (xs*i),40+(ys*j),xs-5,ys-5);// Setting boundaries of seat
+				seat.setBounds(10 + (xs*i),40+(ys*j),xs-2,ys-2);// Setting boundaries of seat
 				seat.setIcon(seatIcons[0]);  // Setting all seats as unselected
 				seat.setText(seatCode);  // Setting seat number as button text
 				seat.setMargin(new Insets(0,0,0,0)); // Making buttons margin-less
-				seat.setFont(new Font("Consolas", Font.PLAIN, 10)); // Setting seat font
+				seat.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 9)); // Setting seat font
+				seat.setForeground(Color.BLACK);
 				seat.setHorizontalTextPosition(JButton.CENTER); // Align text to center
 				seat.setVerticalTextPosition(JButton.CENTER); // Align text to center
 				seat.addActionListener(this);  // If seat is clicked, call action listener
