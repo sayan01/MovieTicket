@@ -2,6 +2,8 @@ import com.mashape.unirest.http.*;
 import com.mashape.unirest.request.GetRequest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.*;
+import java.io.*;
+import java.util.*;
 /*
  *   This class fetches the online movie database from the tMDb open database API
  *   It uses its unique API key to query the database for movies which are showing in theatres now
@@ -17,9 +19,10 @@ class GetMoviesOnline {
 	 *   It uses org.json class to parse the JSON response
 	 *   It stores the title of the movies in an array then returns it
 	 */
-	static String[] getMovies() throws UnirestException {
+	static String[] getMovies() throws UnirestException, FileNotFoundException {
+		String api_key = getKey();
 		GetRequest gr = Unirest.get("https://api.themoviedb.org/3/movie/now_playing?" + //Querying Now Showing Movies
-				"api_key=184059728615a4a82769a144d29a69d8" +    //API key needed to access database
+				"api_key=" + api_key +    //API key needed to access database
 				"&language=en-US" +                             //Language of the movie to be queried
 				"&page=1");                                     //Page whose results to be used
 		JSONObject obj = new JSONObject(gr.asString().getBody());   // Storing returned request as an JSON object
@@ -30,5 +33,9 @@ class GetMoviesOnline {
 			movies[i] = name;
 		}
 		return movies;                                              // Returning the array of movie titles
+	}
+	private static String getKey() throws FileNotFoundException{
+		File f = new File("APIKEY");
+		return new Scanner(f).nextLine();
 	}
 }

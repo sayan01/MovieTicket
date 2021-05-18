@@ -28,8 +28,11 @@ class Database{
 			if(!update) throw new AssertionError(); 
 			updateMovies(); // May throw Unirest Exception if unable to connect to internet
 		}
+		catch (FileNotFoundException fe){ // If no internet, then don't update
+			System.out.println("APIKEY file not found,\nUsing Local Database");
+		}
 		catch (UnirestException ue){ // If no internet, then don't update
-			System.out.println("No Internet Connection,\nCouldn't Update Database,\nUsing Local Database");
+			System.out.println("Couldn't Update Database,\nUsing Local Database");
 		}
 		catch (AssertionError ae){ // If mentioned to run locally, then run locally
 			System.out.println("Executing locally");
@@ -47,7 +50,7 @@ class Database{
 	 *   Description: This method tries to update the local movies database by calling the getMovies() method from
 	 *               class GetMoviesOnline. It creates a new movies.txt file and stores the fetched results in the file
 	 */
-	private void updateMovies() throws UnirestException , IOException {
+	private void updateMovies() throws UnirestException , IOException , FileNotFoundException{
 		System.out.println("Updating Local Database");
 		movies = GetMoviesOnline.getMovies();   // try to fetch latest movies from internet and store it in a variable
 		// may throw Unirest exception if unable to connect to API
